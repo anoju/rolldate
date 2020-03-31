@@ -317,9 +317,7 @@
 						if(_selectedYear == endYear && _selectedMonth > endMonth)_selectedMonth = endMonth;
 						if(_selectedYear == beginYear && _selectedMonth == beginMonth)_dayFirst = beginDay;
 						if(_selectedYear == endYear && _selectedMonth == endMonth)_dayLast = endDay;
-						console.log(_selectedYear,beginYear,_selectedMonth,beginMonth)
 						if ((_dayLast-_dayFirst+1) != $('#' + domId['DD'] + ' li', 1).length) {
-							console.log('day refresh');
 							for (var _dayI = _dayFirst; _dayI <= _day; _dayI++) {
 								_dayLi += '<li class="wheel-item">' + (_dayI < 10 ? '0' + _dayI : _dayI) + lang.day + '</li>';
 							}
@@ -512,7 +510,10 @@
 			}, 300);
 		},
 		getSelected: function getSelected(scroll) {
-			return $('#' + scroll.wrapper.id + ' li', 1)[scroll.getSelectedIndex()].innerText.replace(/\D/g, '');
+			var $innerText = $('#' + scroll.wrapper.id + ' li', 1)[scroll.getSelectedIndex()].innerText
+			if($innerText != undefined){
+				return $innerText.replace(/\D/g, '');
+			}
 		}
 	};
 	Rolldate.version = version;
